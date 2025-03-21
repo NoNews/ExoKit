@@ -9,14 +9,7 @@ import java.util.LinkedList
 
 class ExoKitPlayerPool(
     val context: Context,
-    val poolSize: () -> Int = { 3 }, // TODO: keep it simple, int should be enough ??
-                                     // TODO: you should set some limitation there, you should not live it open like that
-                                     // TODO: how do i know how many players to use?
-                                     // In long form content, a video that has a design preview instead of the first frame
-                                     // immediately starting the video is negative, accoridng to some researches that AHmed did in Spotify
-                                     // especially for a long form, where you committing a lot of time as a watcher. The design image is used to inform you of what to expect in the video.
-                                     // and if you don't have enough time to read what is it, you;re more likely to drop the video.
-                                     // so we need to distinguish video which has "hero" image and "not".
+    val poolSize: () -> Int = { 3 },
     val playerCreator: (Context) -> ExoPlayer = { context -> ExoPlayer.Builder(context).build() }
 ) {
 
