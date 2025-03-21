@@ -16,7 +16,7 @@ import com.personal.exo_kit.internal.data.coordinator.listener.PlayerListener
 import com.personal.exo_kit.internal.data.store.ExoKitPlaybackStoreImpl
 import com.personal.exo_kit.internal.data.store.mutator.PlaybackMutation
 import com.personal.exo_kit.internal.data.store.wish.ConsumerWish
-import com.personal.exo_kit.internal.data.store.wish.ConsumerWishesImpl
+import com.personal.exo_kit.internal.data.store.wish.ExoKitWishesImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelChildren
@@ -28,7 +28,7 @@ internal class ExoKitVideoViewModel(
     private val priorityCoordinator: ExoKitPriorityCoordinator,
     private val props: ExoKitVideoProps,
     private val playbackStore: ExoKitPlaybackStoreImpl,
-    private val wishesImpl: ConsumerWishesImpl,
+    private val wishesImpl: ExoKitWishesImpl,
     private val activeVideoMediator: ActiveVideoMediator,
 ) : PlayerListener(), AssociationListener {
 
@@ -97,6 +97,13 @@ internal class ExoKitVideoViewModel(
                             sessionId = "",
                             position = props.position,
                             loop = props.loop,
+                        )
+
+                        ConsumerWish.Replay -> playbackCoordinator.replay(
+                            mediaId = props.mediaId,
+                            url = props.url,
+                            sessionId = "",
+                            position = props.position,
                         )
 
                         ConsumerWish.Pause -> playbackCoordinator.pause(

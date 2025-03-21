@@ -98,6 +98,27 @@ class ExoKitPlaybackCoordinator(
         preloadManager.setCurrentPlayingIndex(position)
     }
 
+    fun replay(
+        mediaId: String,
+        url: String,
+        sessionId: String,
+        position: Int,
+    ) {
+        val player = playerPool.acquire(mediaId)
+            ?: error("Impossible to reach here, will be replaced with another code block soon")
+        player.replay(
+            mediaId = mediaId,
+            surfaceId = sessionId
+        ) {
+            val mediaItem = MediaItem.Builder()
+                .setMediaId(mediaId)
+                .setUri(url)
+                .build()
+            preloadManager.getMediaSource(mediaItem)!!
+        }
+        preloadManager.setCurrentPlayingIndex(position)
+    }
+
     fun pause(mediaId: String, surfaceId: String) {
         val player = playerPool.acquire(key = mediaId)
         player?.pause(mediaId = mediaId, surfaceId = surfaceId)

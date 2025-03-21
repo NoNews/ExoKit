@@ -12,7 +12,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.personal.exo_kit.api.ui.params.ExoKitVideoProps
 import com.personal.exo_kit.api.ui.params.VideoSurfaceLifecycle
 import com.personal.exo_kit.internal.data.DI
-import com.personal.exo_kit.internal.data.store.wish.ConsumerWishesImpl
+import com.personal.exo_kit.internal.data.store.wish.ExoKitWishesImpl
 import com.personal.exo_kit.internal.ui.ExoKitVideoViewModel
 import com.personal.exo_kit.internal.ui.ExoKitVideoSurface
 
@@ -28,7 +28,7 @@ fun ExoKitVideo(
             props = props,
             playbackStore = DI.playbackStore,
             activeVideoMediator = DI.activeVideoMediator,
-            wishesImpl = DI.consumerWishes as ConsumerWishesImpl,
+            wishesImpl = DI.consumerWishes as ExoKitWishesImpl,
         )
     }
     Box(modifier) {

@@ -4,14 +4,14 @@ import com.personal.exo_kit.api.data.ActiveVideoMediator
 import com.personal.exo_kit.internal.data.coordinator.ExoKitPlaybackCoordinator
 import com.personal.exo_kit.internal.data.coordinator.ExoKitPriorityCoordinator
 import com.personal.exo_kit.internal.data.store.ExoKitPlaybackStoreImpl
-import com.personal.exo_kit.internal.data.store.wish.ConsumerWishes
-import com.personal.exo_kit.internal.data.store.wish.ConsumerWishesImpl
+import com.personal.exo_kit.internal.data.store.wish.ExoKitWishes
+import com.personal.exo_kit.internal.data.store.wish.ExoKitWishesImpl
 
 internal object DI {
     private lateinit var visibilityCoordinatorProvider: () -> ExoKitPriorityCoordinator
     private lateinit var playbackCoordinatorProvider: () -> ExoKitPlaybackCoordinator
     private lateinit var playbackStoreProvider: () -> ExoKitPlaybackStoreImpl
-    private lateinit var consumerWishesProvider: () -> ConsumerWishes
+    private lateinit var consumerWishesProvider: () -> ExoKitWishes
     private lateinit var poolProvider: () -> ExoKitPlaybackStoreImpl
 
     val visibilityCoordinator by lazy {
@@ -48,7 +48,7 @@ internal object DI {
         playbackStoreProvider = function
     }
 
-    fun setWishes(function: () -> ConsumerWishesImpl) {
+    fun setWishes(function: () -> ExoKitWishesImpl) {
         consumerWishesProvider = function
     }
 

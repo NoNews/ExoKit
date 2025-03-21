@@ -8,7 +8,7 @@ import com.personal.exo_kit.internal.data.DI
 import com.personal.exo_kit.internal.data.coordinator.ExoKitPlaybackCoordinator
 import com.personal.exo_kit.internal.data.coordinator.ExoKitPriorityCoordinator
 import com.personal.exo_kit.internal.data.store.ExoKitPlaybackStoreImpl
-import com.personal.exo_kit.internal.data.store.wish.ConsumerWishesImpl
+import com.personal.exo_kit.internal.data.store.wish.ExoKitWishesImpl
 
 object ExoKit {
 
@@ -31,7 +31,7 @@ object ExoKit {
             ExoKitPriorityCoordinator()
         }
 
-        DI.setWishes { ConsumerWishesImpl() }
+        DI.setWishes { ExoKitWishesImpl() }
         DI.setPlaybackStore {
             ExoKitPlaybackStoreImpl(
             )

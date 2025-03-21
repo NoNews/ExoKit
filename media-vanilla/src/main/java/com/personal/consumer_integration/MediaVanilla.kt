@@ -43,7 +43,7 @@ import kotlinx.coroutines.Dispatchers
 @Composable
 fun MediaVanilla(props: MediaVanillaProps, modifier: Modifier) {
     val store = rememberVideoPlaybackStore()
-    val wish = rememberWishes()
+    val exoKitWishes = rememberWishes()
     val activeVideoMediator = rememberActiveVideoMediator()
     val viewModel = remember {
         MediaVanillaViewModel(
@@ -51,13 +51,12 @@ fun MediaVanilla(props: MediaVanillaProps, modifier: Modifier) {
             scope = CoroutineScope(Dispatchers.Main.immediate),
             mediaSettingsStore = MediaDI.mediaSettingsStore,
             activeVideoMediator = activeVideoMediator,
-            wishes = wish,
+            exoKitWishes = exoKitWishes,
             props = props,
         )
     }
     val mediaId = props.mediaId
     val state = rememberVideoPlaybackState(mediaId)
-
 
     var videoVisibilityFraction by remember { mutableFloatStateOf(0f) }
 

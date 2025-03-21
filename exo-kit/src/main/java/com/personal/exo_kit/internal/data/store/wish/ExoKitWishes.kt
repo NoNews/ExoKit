@@ -1,11 +1,12 @@
 package com.personal.exo_kit.internal.data.store.wish
 
-interface ConsumerWishes {
+interface ExoKitWishes {
     fun wish(mediaId: String, wish: ConsumerWish)
 }
 
 sealed class ConsumerWish {
     data object Play : ConsumerWish()
+    data object Replay : ConsumerWish()
     data object Pause : ConsumerWish()
     data class SeekFraction(val fraction: Float) : ConsumerWish()
     data class SeekPosition(val position: Long) : ConsumerWish()

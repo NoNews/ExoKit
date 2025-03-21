@@ -8,7 +8,7 @@ import com.personal.exo_kit.api.data.ActiveVideoMediator
 import com.personal.exo_kit.api.data.ExoKitPlaybackStore
 import com.personal.exo_kit.api.data.PlaybackState
 import com.personal.exo_kit.internal.data.DI
-import com.personal.exo_kit.internal.data.store.wish.ConsumerWishes
+import com.personal.exo_kit.internal.data.store.wish.ExoKitWishes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.mapNotNull
@@ -21,7 +21,7 @@ fun rememberVideoPlaybackStore(): ExoKitPlaybackStore {
 }
 
 @Composable
-fun rememberWishes(): ConsumerWishes {
+fun rememberWishes(): ExoKitWishes {
     return remember { DI.consumerWishes }
 }
 

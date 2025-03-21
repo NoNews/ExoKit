@@ -73,6 +73,32 @@ class ExoKitPlayer(val exo: ExoPlayer, val name: PlayerName) {
         return exo.bufferedPosition
     }
 
+    fun replay(
+        mediaId: String,
+        surfaceId: String,
+        mediaSourceProvider: () -> MediaSource,
+    ) {
+        println("ExoKit:act:ExoKitPlayer:replay, $mediaId#$surfaceId, player:${name}, state: ${exo.playbackState}")
+        val playbackState = exo.playbackState
+        if (playbackState == Player.STATE_IDLE) {
+            println("ExoKit:act:ExoKitPlayer:replay, $mediaId#$surfaceId, player:${name} was IDLE, preparing...")
+            prepare(
+                mediaId = mediaId,
+                surfaceId = surfaceId,
+                mediaSourceProvider = mediaSourceProvider,
+            )
+        }
+
+        if (playbackState == Player.STATE_ENDED) {
+            exo.seekToDefaultPosition()
+        }
+
+        if (!exo.playWhenReady) {
+            exo.playWhenReady = true
+            println("ExoKit:act:ExoKitPlayer:replay, $mediaId#$surfaceId, player:${name} playWhenReady was false, now true")
+        }
+    }
+
     fun play(
         mediaId: String,
         surfaceId: String,

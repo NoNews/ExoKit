@@ -8,7 +8,7 @@ import com.personal.exo_kit.api.data.ExoKitPlaybackStore
 import com.personal.exo_kit.api.data.PlayerEffect
 import com.personal.exo_kit.api.ui.params.SurfaceLifecycle
 import com.personal.exo_kit.internal.data.store.wish.ConsumerWish
-import com.personal.exo_kit.internal.data.store.wish.ConsumerWishes
+import com.personal.exo_kit.internal.data.store.wish.ExoKitWishes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.collectLatest
@@ -21,13 +21,13 @@ class MediaVanillaViewModel(
     private val mediaSettingsStore: MediaSessionStore,
     private val activeVideoMediator: ActiveVideoMediator,
     private val scope: CoroutineScope,
-    private val wishes: ConsumerWishes,
+    private val exoKitWishes: ExoKitWishes,
 ) {
     init {
         scope.launch {
             mediaSettingsStore.observeMuteSession()
                 .collectLatest { mutedByUser ->
-                    wishes.wish(
+                    exoKitWishes.wish(
                         mediaId = props.mediaId,
                         wish = ConsumerWish.ToggleMute(mute = mutedByUser)
                     )
@@ -36,7 +36,6 @@ class MediaVanillaViewModel(
 
         scope.launch {
             playbackStore.observeEffects().collectLatest { effect ->
-
                 when (effect) {
                     is PlayerEffect.VideoRestarted -> {
                         // analytics that video is restarted
@@ -47,7 +46,7 @@ class MediaVanillaViewModel(
     }
 
     fun onLifecycleChanged(videoVisibilityFraction: Float, lifecycle: SurfaceLifecycle) {
-        wishes.wish(
+        exoKitWishes.wish(
             mediaId = props.mediaId,
             wish = ConsumerWish.PriorityChanged(
                 fraction = videoVisibilityFraction,
