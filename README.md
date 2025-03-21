@@ -1,2 +1,1 @@
 # ExoKit
-Playground with ExoPlayer
