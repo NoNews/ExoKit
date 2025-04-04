@@ -35,6 +35,7 @@ internal class ExoKitVideoViewModel(
     private val scope = CoroutineScope(Dispatchers.Main)
     private var surface: ExoKitVideoSurface? = null
     private var wasEverActive: Boolean = false
+    private var autoplayEnabled: Boolean = true
 
     private val playbackKey = PlaybackKey(
         mediaId = props.mediaId,
@@ -138,6 +139,10 @@ internal class ExoKitVideoViewModel(
                                 surfaceId = props.surfaceId
                             )
                         }
+
+                        is ConsumerWish.ToggleAutoplay -> {
+                            autoplayEnabled = wish.autoplay
+                        }
                     }
                 }
         }
@@ -163,13 +168,15 @@ internal class ExoKitVideoViewModel(
                 surface = surface!!,
                 surfaceId = props.surfaceId
             )
-            playbackCoordinator.play(
-                mediaId = props.mediaId,
-                url = props.url,
-                sessionId = "",
-                position = props.position,
-                loop = props.loop,
-            )
+            if (autoplayEnabled) {
+                playbackCoordinator.play(
+                    mediaId = props.mediaId,
+                    url = props.url,
+                    sessionId = "",
+                    position = props.position,
+                    loop = props.loop,
+                )
+            }
             wasEverActive = true
             return
         } else if (wasEverActive) {

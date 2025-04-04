@@ -1,6 +1,7 @@
 package com.personal.consumer_integration.internal
 
 import android.annotation.SuppressLint
+import com.personal.consumer_integration.AutoplayMode
 import com.personal.consumer_integration.MediaVanillaProps
 import com.personal.consumer_integration.settings.MediaSessionStore
 import com.personal.exo_kit.api.data.ActiveVideoMediator
@@ -41,6 +42,41 @@ class MediaVanillaViewModel(
                         // analytics that video is restarted
                     }
                 }
+            }
+        }
+
+        when (props.autoplayMode) {
+            AutoplayMode.APP_SETTINGS -> {
+                scope.launch {
+                    mediaSettingsStore.observeAutoplaySession()
+                        .collectLatest { autoplay ->
+                            exoKitWishes.wish(
+                                mediaId = props.mediaId,
+                                wish = ConsumerWish.ToggleAutoplay(autoplay)
+                            )
+                        }
+                }
+            }
+
+            AutoplayMode.ENABLED -> {
+                exoKitWishes.wish(
+                    mediaId = props.mediaId,
+                    wish = ConsumerWish.ToggleAutoplay(true)
+                )
+            }
+
+            AutoplayMode.DISABLED -> {
+                exoKitWishes.wish(
+                    mediaId = props.mediaId,
+                    wish = ConsumerWish.ToggleAutoplay(false)
+                )
+            }
+
+            AutoplayMode.BLURRED -> {
+                exoKitWishes.wish(
+                    mediaId = props.mediaId,
+                    wish = ConsumerWish.ToggleAutoplay(false)
+                )
             }
         }
     }

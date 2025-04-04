@@ -57,6 +57,9 @@ data class PlaybackState(
     val playbackSpeed: Float = 1f
 )
 
+fun PlaybackState.isPausedOrIdle(): Boolean =
+    playerState == PlayerState.Paused || playerState == PlayerState.Idle
+
 fun PlaybackState.isPlaying() = playerState == PlayerState.Playing
 fun PlaybackState.isBuffering() = playerState == PlayerState.Buffering
 fun PlaybackState.isEnded() = playerState == PlayerState.Ended

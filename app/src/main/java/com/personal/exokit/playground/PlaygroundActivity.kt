@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.personal.common.AppDi
+import com.personal.consumer_integration.AutoplayMode
 import com.personal.consumer_integration.MediaVanilla
 import com.personal.consumer_integration.MediaVanillaProps
 import com.personal.consumer_integration.SurfaceLifecycleProvider
@@ -64,7 +65,8 @@ class PlaygroundActivity : ComponentActivity() {
                         surfaceName = "playground_screen",
                         loop = false,
                         position = 0,
-                        scale = ContentScale.FillWidth
+                        scale = ContentScale.FillWidth,
+                        autoplayMode = AutoplayMode.APP_SETTINGS
                     ),
                     modifier = Modifier.height(300.dp)
                         .fillMaxWidth()

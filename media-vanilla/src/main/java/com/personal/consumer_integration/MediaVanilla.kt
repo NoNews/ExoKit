@@ -24,6 +24,7 @@ import com.personal.consumer_integration.blocks.DebugBlock
 import com.personal.consumer_integration.blocks.MuteButtonBlock
 import com.personal.consumer_integration.blocks.VideoEndedBlock
 import com.personal.consumer_integration.blocks.VideoLoadingBlock
+import com.personal.consumer_integration.blocks.VideoPlayBlock
 import com.personal.consumer_integration.di.MediaDI
 import com.personal.consumer_integration.extensions.onVisibilityChanged
 import com.personal.consumer_integration.internal.MediaVanillaViewModel
@@ -112,6 +113,13 @@ fun MediaVanilla(props: MediaVanillaProps, modifier: Modifier) {
         VideoEndedBlock(
             mediaId = props.mediaId,
         )
+
+        if (props.autoplayMode == AutoplayMode.DISABLED || props.autoplayMode == AutoplayMode.APP_SETTINGS) {
+            VideoPlayBlock(
+                mediaId = props.mediaId,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
 
         MuteButtonBlock(
             mediaId = props.mediaId,

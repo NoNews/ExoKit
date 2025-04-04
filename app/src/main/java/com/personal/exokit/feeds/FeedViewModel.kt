@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.personal.consumer_integration.AutoplayMode
 import com.personal.consumer_integration.Controls
 import com.personal.consumer_integration.MediaVanillaProps
 import com.personal.exokit.data.PostRepository
@@ -63,6 +64,7 @@ class FeedViewModel(
                     surfaceName = "home_feed",
                     loop = false,
                     scale = ContentScale.FillBounds,
+                    autoplayMode = AutoplayMode.APP_SETTINGS,
                     position = index
                 )
             )

@@ -16,8 +16,16 @@ data class MediaVanillaProps(
     val loop: Boolean,
     val surfaceName: String,
     val scale: ContentScale,
+    val autoplayMode: AutoplayMode,
     val position: Int,
 )
+
+enum class AutoplayMode {
+    APP_SETTINGS,
+    ENABLED,
+    DISABLED,
+    BLURRED,
+}
 
 
 sealed class ClickAction {

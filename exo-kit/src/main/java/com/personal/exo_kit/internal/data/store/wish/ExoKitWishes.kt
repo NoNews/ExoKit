@@ -17,4 +17,6 @@ sealed class ConsumerWish {
     data object Retry : ConsumerWish()
 
     data class ToggleMute(val mute: Boolean) : ConsumerWish()
+
+    data class ToggleAutoplay(val autoplay: Boolean) : ConsumerWish()
 }

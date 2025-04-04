@@ -8,7 +8,6 @@ data class ExoKitVideoProps(
     val mediaId: String,
     val sessionId: String,
     val loop: Boolean = true,
-    val autoplay: Boolean = true,
     val surfaceId: String,
     val position: Int,
 )
