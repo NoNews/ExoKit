@@ -5,7 +5,6 @@ package com.personal.consumer_integration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -16,19 +15,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.personal.consumer_integration.blocks.DebugBlock
 import com.personal.consumer_integration.blocks.MuteButtonBlock
 import com.personal.consumer_integration.blocks.VideoEndedBlock
+import com.personal.consumer_integration.blocks.VideoErrorBlock
 import com.personal.consumer_integration.blocks.VideoLoadingBlock
 import com.personal.consumer_integration.blocks.VideoPlayBlock
 import com.personal.consumer_integration.di.MediaDI
 import com.personal.consumer_integration.extensions.onVisibilityChanged
 import com.personal.consumer_integration.internal.MediaVanillaViewModel
-import com.personal.exo_kit.api.data.PlayerState
 import com.personal.exo_kit.api.ui.ExoKitVideo
 import com.personal.exo_kit.api.ui.params.ExoKitVideoProps
 import com.personal.exo_kit.api.ui.params.VideoSurfaceLifecycle
@@ -133,38 +131,9 @@ fun MediaVanilla(props: MediaVanillaProps, modifier: Modifier) {
             modifier = Modifier.align(Alignment.Center)
         )
 
-
-        when (val state = state.playerState) {
-            is PlayerState.Buffering -> {
-            }
-
-            is PlayerState.Error -> {
-                Text(
-                    text = "Playback error! ${state.exception?.errorCode}, ${state.exception?.errorCodeName}",
-                    color = Color.Red,
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-
-            PlayerState.Idle -> {
-
-            }
-
-            PlayerState.Paused -> {
-
-            }
-
-            PlayerState.Playing -> {
-
-            }
-
-            PlayerState.Ready -> {
-
-            }
-
-            PlayerState.Ended -> {
-
-            }
-        }
+        VideoErrorBlock(
+            mediaId = props.mediaId,
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }

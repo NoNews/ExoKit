@@ -30,7 +30,6 @@ fun VideoPlayBlock(
     mediaId: String,
     modifier: Modifier = Modifier,
 ) {
-
     val settings = rememberMediaSettings()
     val state = rememberVideoPlaybackState(mediaId)
     val wishes = rememberWishes()
